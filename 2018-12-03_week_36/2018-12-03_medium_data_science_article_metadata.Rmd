@@ -1,0 +1,8 @@
+---
+title: "Medium data science article metadata"
+author: "Katie Saund"
+date: "12/3/2018"
+output: html_document
+---
+
+# Tiday Tuesday Week 36
