@@ -1,15 +1,18 @@
 ---
-title: ""
+title: ''
 author: "Katie Saund"
 date: "12/3/2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
+  latex_engine: xelatex 
 ---
 
 # Tiday Tuesday Week 36  
 ## Medium data science article metadata
 ### Goal is to work with the tidytext package.  
 
-```{r}
+```{r, message = FALSE}
 # LIBRARIES -------------------------------------------------------------------#
 library(tidyverse)
 library(tidytext)
