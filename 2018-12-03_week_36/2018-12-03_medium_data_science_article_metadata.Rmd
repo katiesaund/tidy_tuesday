@@ -148,6 +148,39 @@ metadata %>%
 Wow, almost no difference. Maybe how-to articles ("guide") have broad audiences because they are for amateurs?  
 Perhaps some of the difference in popularity is not because unpopular articles exclude buzz words, but that they include words that drive away views.  
 
+
+Per suggestion on twitter using forcats package (part of tidyverse) to order the bars in decreasing order to improve interpretability of the plot. 
+```{r}
+metadata %>%
+  filter(claps > 10000) %>%
+  unnest_tokens(word, title) %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  filter(n > 3) %>%
+  ggplot(mapping = aes(x = fct_reorder(word, n, .desc = TRUE), y = n/sum(n))) +
+  theme_bw() + 
+  geom_bar(stat = "identity") + 
+  ylab("Frequency") + 
+  xlab("word") + 
+  ggtitle(label = "Most common words in popular articles")
+
+
+metadata %>%
+  filter(claps < 10) %>%
+  unnest_tokens(word, title) %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  filter(n > 1500) %>%
+  ggplot(mapping = aes(x = fct_reorder(word, n, .desc = TRUE), y = n/sum(n))) +
+  theme_bw() + 
+  geom_bar(stat = "identity") + 
+  ylab("Frequency") + 
+  xlab("word") + 
+  ggtitle(label = "Most common words in unpopular articles")
+```
+
+
+
 # Learning moments
 * TidyTuesday is great fun! I want to continue using this challenge to improve my speed & confidence using the tidyverse grammar and tools. 
 * I used lubridate, distinct(), and add_cout() for the first time today. 
